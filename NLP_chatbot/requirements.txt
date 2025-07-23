@@ -1,7 +1,0 @@
-  flask==3.0.3
-  sentence-transformers==3.0.1
-  transformers==4.44.2
-  numpy==1.26.4
-  scikit-learn==1.5.1
-  pandas==2.2.2
-  gunicorn==23.0.0
