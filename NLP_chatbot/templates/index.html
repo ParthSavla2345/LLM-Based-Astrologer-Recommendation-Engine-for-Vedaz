@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedaz Astrology Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('https://source.unsplash.com/random/1600x900/?stars');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .form-section {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+        .result-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .error-box {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="container">
+        <h1 class="text-4xl font-bold text-center mb-8">🌟 Vedaz Astrology Platform 🌟</h1>
+        <p class="text-center mb-8">Connect with the cosmos to find your perfect astrologer and receive tailored, mystical guidance!</p>
+
+        <!-- Recommendation Form -->
+        <div class="form-section">
+            <h2 class="text-2xl font-semibold mb-4">Find Your Perfect Astrologer</h2>
+            <form method="POST" class="space-y-4">
+                <input type="text" name="rec_query" placeholder="What guidance do you seek? (e.g., I need career advice)" 
+                       class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-500">
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                    Discover Astrologers
+                </button>
+            </form>
+            {% if rec_feedback %}
+                <p class="text-yellow-300 mt-4">{{ rec_feedback }}</p>
+            {% endif %}
+            {% if rec_result %}
+                <div class="result-box">
+                    <h3 class="text-xl font-semibold mb-4">✨ Top Astrologer Recommendations ✨</h3>
+                    {% for rec in rec_result %}
+                        <div class="mb-4">
+                            <p><strong>{{ loop.index }}. {{ rec.name }}</strong> (Match Score: {{ rec.relevance_score }})</p>
+                            <p>Why they're a fit: {{ rec.bio }}</p>
+                            <p>Specialties: {{ rec.tags | join(', ') }}</p>
+                            <p>Experience: {{ rec.experience_years }} years | Rating: {{ rec.rating }}/5</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- AI Astrologer Form -->
+        <div class="form-section">
+            <h2 class="text-2xl font-semibold mb-4">Seek Mystical Advice</h2>
+            <form method="POST" class="space-y-4">
+                <input type="text" name="advice_query" placeholder="Enter your palm reading (e.g., Your heart line is deep and curved)" 
+                       class="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-purple-500">
+                <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                    Receive Cosmic Guidance
+                </button>
+            </form>
+            {% if advice_feedback %}
+                <p class="text-yellow-300 mt-4">{{ advice_feedback }}</p>
+            {% endif %}
+            {% if advice_result %}
+                <div class="result-box">
+                    <h3 class="text-xl font-semibold mb-4">✨ Your Cosmic Insight ✨</h3>
+                    <p>{{ advice_result }}</p>
+                    <p class="mt-2">Connect with this astrologer for deeper insights!</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
